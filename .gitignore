@@ -5,7 +5,9 @@ __pycache__/
 *$py.class
 
 # SQLite database
+# Ignora todos los .db EXCEPTO el archivo que queremos subir
 *.db
+!data/analisis_energetico.db
 
 # Environment variables and secrets
 .env
