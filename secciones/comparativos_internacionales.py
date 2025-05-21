@@ -15,10 +15,10 @@ def mostrar(pais, anio, df):
     st.plotly_chart(fig1, use_container_width=True)
 
     st.markdown("### 📊 Gráfico 2: Barras – Top 10 Países")
-    fig2 = px.bar(top_paises, x="Country", y="Value", text_auto=True, title="Producción por País")
+    fig2 = px.bar(top_paises, x="Country", y="Value", title="Producción por País")
     st.plotly_chart(fig2, use_container_width=True)
 
-    # Subgráficos comparativos
+    st.markdown("### 🪟 Gráfico 3: Subgráficos Comparativos")
     fuentes_renovables = ['Wind', 'Solar', 'Other Renewables', 'Hydro', 'Geothermal', 'Combustible Renewables']
     fuentes_no_renovables = ['Coal, Peat and Manufactured Gases', 'Oil and Petroleum Products', 'Natural Gas',
                              'Other Combustible Non-Renewables', 'Nuclear']
@@ -32,10 +32,9 @@ def mostrar(pais, anio, df):
 
     fig_sub = make_subplots(rows=1, cols=2, subplot_titles=("Energías Renovables", "Energías No Renovables"))
     for col in df_ren_pivot.columns:
-        fig_sub.add_trace(go.Bar(name=col, x=df_ren_pivot.index, y=df_ren_pivot[col]), row=1, col=1)
+        fig_sub.add_trace(go.Bar(name=col, x=df_ren_pivot.index, y=df_ren_pivot[col], marker_color="#2ca02c"), row=1, col=1)
     for col in df_no_ren_pivot.columns:
-        fig_sub.add_trace(go.Bar(name=col, x=df_no_ren_pivot.index, y=df_no_ren_pivot[col]), row=1, col=2)
+        fig_sub.add_trace(go.Bar(name=col, x=df_no_ren_pivot.index, y=df_no_ren_pivot[col], marker_color="#d62728"), row=1, col=2)
 
     fig_sub.update_layout(barmode='stack', height=500, title_text="Comparativo Energético por Año")
-    st.markdown("### 🪟 Gráfico 3: Subgráficos Comparativos")
     st.plotly_chart(fig_sub, use_container_width=True)

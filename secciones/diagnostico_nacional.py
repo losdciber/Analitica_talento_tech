@@ -9,31 +9,21 @@ def mostrar(pais, anio, df):
     if pais != "Todos":
         df_filtrado = df_filtrado[df_filtrado['Country'] == pais]
 
-    col1, col2 = st.columns(2)
+    st.markdown("### 🏭 Gráfico 1: Producción por Fuente")
+    fig1 = px.bar(df_filtrado, x="Value", y="Product", orientation="h", title="Producción por Fuente")
+    st.plotly_chart(fig1, use_container_width=True)
 
-    with col1:
-        st.markdown("### 🏭 Gráfico 1: Producción por Fuente")
-        st.plotly_chart(
-            px.bar(df_filtrado, x="Value", y="Product", orientation="h", title="Producción por Fuente"),
-            use_container_width=True
-        )
+    st.markdown("### 🧁 Gráfico 2: Distribución de Producción")
+    fig2 = px.pie(df_filtrado, names="Product", values="Value", title="Distribución de Producción")
+    st.plotly_chart(fig2, use_container_width=True)
 
-        st.markdown("### ⚖️ Gráfico 2: Balance energético")
-        st.plotly_chart(
-            px.histogram(df_filtrado, x="Balance", y="Value", title="Balance Energético"),
-            use_container_width=True
-        )
+    st.markdown("### ⚖️ Gráfico 3: Balance energético")
+    balance_df = df_filtrado[df_filtrado['Balance'].notna()]
+    fig3 = px.bar(balance_df, x="Balance", y="Value", color="Balance", title="Balance Energético")
+    st.plotly_chart(fig3, use_container_width=True)
 
-    with col2:
-        st.markdown("### 🧁 Gráfico 3: Distribución de Producción")
-        st.plotly_chart(
-            px.pie(df_filtrado, names="Product", values="Value", title="Distribución de Producción"),
-            use_container_width=True
-        )
-
-        st.markdown("### 📉 Gráfico 4: Tendencia Histórica")
-        tendencia_df = df[df['Country'] == pais] if pais != 'Todos' else df
-        st.plotly_chart(
-            px.line(tendencia_df, x="Year", y="Value", title="Tendencia Histórica"),
-            use_container_width=True
-        )
+    st.markdown("### 📉 Gráfico 4: Tendencia Histórica")
+    tendencia_df = df[df['Country'] == pais] if pais != 'Todos' else df
+    tendencia_df = tendencia_df.groupby(['Year'])['Value'].sum().reset_index()
+    fig4 = px.line(tendencia_df, x="Year", y="Value", title="Tendencia Histórica de Producción")
+    st.plotly_chart(fig4, use_container_width=True)
