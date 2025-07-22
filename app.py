@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 from utils import cargar_datos
 from secciones import (
     home,
@@ -9,7 +9,8 @@ from secciones import (
     emisiones_co2,
     relaciones_desempeno,
     predicciones,
-    flujos_energeticos
+    flujos_energeticos,
+    estructura_proyecto  # NUEVA SECCIÓN
 )
 
 # Configurar la página
@@ -18,20 +19,22 @@ st.set_page_config(page_title="Dashboard Energético", layout="wide")
 # Cargar datos una sola vez
 df = cargar_datos()
 
-# Estilos CSS personalizados para el sidebar (modo claro)
+# Estilos CSS personalizados para el sidebar (modo claro) + responsividad
 st.markdown("""
     <style>
+    /* Sidebar personalizado */
     [data-testid="stSidebar"] {
         background-color: #f2f2f2;
+        padding: 1rem;
     }
     .sidebar-title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: bold;
         color: #000000;
         padding-bottom: 10px;
     }
     .sidebar-radio label {
-        font-size: 17px;
+        font-size: 16px;
         padding: 8px 12px;
         border-radius: 6px;
         display: block;
@@ -47,10 +50,27 @@ st.markdown("""
         background-color: #cccccc !important;
         color: #000000 !important;
     }
+
+    /* Ajustes para móvil */
+    @media only screen and (max-width: 768px) {
+        .sidebar-title {
+            font-size: 18px;
+        }
+        .sidebar-radio label {
+            font-size: 14px;
+            padding: 6px 10px;
+        }
+    }
+
+    /* Ajuste del ancho del contenedor principal para mejorar lectura */
+    .main .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar: navegación mejorada sin emojis
+# Sidebar: navegación mejorada
 menu_opciones = {
     "Home": "Home",
     "Matriz Energética": "Matriz Energética",
@@ -60,7 +80,8 @@ menu_opciones = {
     "Emisiones de CO2": "Emisiones de CO2",
     "Análisis de Relaciones y Desempeño": "Análisis de Relaciones y Desempeño",
     "Predicciones": "Predicciones",
-    "Flujos Energéticos": "Flujos Energéticos"
+    "Flujos Energéticos": "Flujos Energéticos",
+    "Estructura del Proyecto": "Estructura del Proyecto"  # NUEVA OPCIÓN
 }
 
 with st.sidebar:
@@ -91,3 +112,5 @@ elif seccion == "Predicciones":
     predicciones.mostrar()
 elif seccion == "Flujos Energéticos":
     flujos_energeticos.mostrar()
+elif seccion == "Estructura del Proyecto":
+    estructura_proyecto.mostrar()
