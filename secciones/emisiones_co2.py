@@ -1,41 +1,86 @@
-
 import streamlit as st
+import pandas as pd
 import plotly.express as px
-from utils import obtener_emisiones_co2
+from utils import ejecutar_consulta, mostrar_tarjeta_valor_maximo
 
-def mostrar(anio):
-    """
-    Visualiza las emisiones de CO₂ para Colombia en el año seleccionado.
-    Los datos se extraen de la tabla específica de emisiones.
-    """
-    df = obtener_emisiones_co2()
+def mostrar(df):
+    st.title("🌿 Emisiones de CO₂")
 
-    df_filtrado = df[df['Year'] == anio]
+    # Obtener datos
+    df = ejecutar_consulta("SELECT * FROM 'International Energy Agency - CO2 emissions by sector in Colombia'")
 
-    if df_filtrado.empty or "CO2 Emissions" not in df_filtrado["Product"].unique():
-        st.warning("⚠️ No hay datos de emisiones de CO₂ disponibles para el año seleccionado.")
-        return
+    # 🎛️ Filtros en el sidebar
+    with st.sidebar:
+        st.markdown("### 🎛️ Filtros - Emisiones de CO₂")
+        anios = sorted(df['Year'].dropna().unique())
+        anio_sel = st.selectbox("📅 Año", anios, index=len(anios) - 1)
+        sectores_disponibles = sorted(df['Sector'].dropna().unique())
+        sectores_sel = st.multiselect("🏭 Sectores", sectores_disponibles, default=sectores_disponibles)
 
-    df_emisiones = df_filtrado[df_filtrado["Product"] == "CO2 Emissions"]
+    # Filtro de datos
+    df_filtrado = df[(df['Year'] == anio_sel) & (df['Sector'].isin(sectores_sel))].copy()
+    df_filtrado = df_filtrado.sort_values(by='Value', ascending=False).reset_index(drop=True)
 
-    st.markdown("### 🌍 Gráfico 1: Emisiones totales de CO₂")
-    fig1 = px.bar(
-        df_emisiones,
-        x="Year",
-        y="Value",
-        title="Emisiones totales de CO₂ (Colombia)",
-        color_discrete_sequence=["#636EFA"]
+    # Calcular participación porcentual
+    total_emisiones = df_filtrado['Value'].sum()
+    df_filtrado['Porcentaje'] = df_filtrado['Value'] / total_emisiones * 100
+
+    # 🏆 Tarjeta
+    mostrar_tarjeta_valor_maximo(
+        df_filtrado,
+        campo_clave="Sector",
+        campo_valor="Value",
+        titulo=f"",
+        unidad="MtCO₂",
+        color="#1F4E79"
     )
-    st.plotly_chart(fig1, use_container_width=True)
 
-    st.markdown("### 📈 Gráfico 2: Tendencia histórica de emisiones en Colombia")
-    df_hist = df[df['Product'] == "CO2 Emissions"]
-    df_hist = df_hist.groupby("Year")["Value"].sum().reset_index()
+    # 📊 Tabla + Gráfico lado a lado alineados
+    st.markdown("### 📋 Emisiones de CO₂ por Sector - %Participación")
 
-    fig2 = px.line(
-        df_hist,
-        x="Year",
-        y="Value",
-        title="Evolución de las emisiones de CO₂ en Colombia"
+    col1, col2 = st.columns([1, 1.5])
+
+    with col1:
+        st.dataframe(
+            df_filtrado[['Sector', 'Value']],
+            hide_index=True,
+            use_container_width=True,
+            height=(len(df_filtrado) * 35 + 50)
+        )
+
+    with col2:
+        fig = px.bar(
+            df_filtrado,
+            x="Porcentaje",
+            y="Sector",
+            orientation="h",
+            color_discrete_sequence=["salmon"],
+            text=df_filtrado["Porcentaje"].apply(lambda x: f"{x:.1f}%")
+        )
+        fig.update_layout(
+            title="% de Participación del sector",
+            xaxis_title=None,
+            yaxis_title=None,
+            yaxis=dict(showticklabels=False, categoryorder='total ascending'),
+            xaxis=dict(showticklabels=False),
+            margin=dict(l=10, r=10, t=38, b=10),
+            height=(len(df_filtrado) * 35 + 50),
+            uniformtext_minsize=9,
+            uniformtext_mode='show',
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    # 📈 Gráfico de área apilada
+    st.markdown("### 📈 Evolución Histórica de Emisiones")
+    df_group = df[df['Sector'].isin(sectores_sel)].groupby(['Year', 'Sector'])['Value'].sum().reset_index()
+    fig2 = px.area(
+        df_group,
+        x='Year',
+        y='Value',
+        color='Sector',
+        #title='Evolución Histórica de Emisiones de CO₂ por Sector',
+        labels={'Value': 'Emisiones de CO₂ (MtCO₂)'}
     )
+    fig2.update_layout(legend_title_text='Sector', hovermode="x unified")
     st.plotly_chart(fig2, use_container_width=True)
+

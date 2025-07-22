@@ -1,42 +1,93 @@
-
 import streamlit as st
 from utils import cargar_datos
-from secciones import diagnostico_nacional, tendencia_mensual, comparativos_internacionales, emisiones_co2
+from secciones import (
+    home,
+    matriz_energetica,
+    consumo_energetico,
+    matriz_electrica,
+    comparativos_internacionales,
+    emisiones_co2,
+    relaciones_desempeno,
+    predicciones,
+    flujos_energeticos
+)
 
+# Configurar la página
 st.set_page_config(page_title="Dashboard Energético", layout="wide")
-st.title("Dashboard Energético Interactivo")
 
-# Cargar datos
+# Cargar datos una sola vez
 df = cargar_datos()
 
-# Sidebar global
+# Estilos CSS personalizados para el sidebar (modo claro)
+st.markdown("""
+    <style>
+    [data-testid="stSidebar"] {
+        background-color: #f2f2f2;
+    }
+    .sidebar-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #000000;
+        padding-bottom: 10px;
+    }
+    .sidebar-radio label {
+        font-size: 18px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        display: block;
+        margin-bottom: 5px;
+        color: #000000;
+        transition: background-color 0.3s ease;
+    }
+    .sidebar-radio label:hover {
+        background-color: #d6d6d6;
+        color: #000000;
+    }
+    .sidebar-radio input:checked + div {
+        background-color: #cccccc !important;
+        color: #000000 !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Sidebar: navegación mejorada sin emojis
+menu_opciones = {
+    "Home": "Home",
+    "Matriz Energética": "Matriz Energética",
+    "Consumo Energético": "Consumo Energético",
+    "Matriz Eléctrica": "Matriz Eléctrica",
+    "Comparativos Internacionales": "Comparativos Internacionales",
+    "Emisiones de CO2": "Emisiones de CO2",
+    "Análisis de Relaciones y Desempeño": "Análisis de Relaciones y Desempeño",
+    "Predicciones": "Predicciones",
+    "Flujos Energéticos": "Flujos Energéticos"
+}
+
 with st.sidebar:
-    st.title("🔌 Dashboard Energético")
-    paises = ['Todos'] + sorted(df['Country'].dropna().unique())
-    pais = st.selectbox("🌍 Selecciona un país", paises)
-
-    anios = sorted(df['Year'].dropna().unique())
-    if anios:
-        anio = st.selectbox("📅 Selecciona un año", anios, index=len(anios) - 1)
-    else:
-        st.warning("⚠️ No hay años disponibles.")
-        st.stop()
-
-    seccion = st.radio("📁 Secciones del Dashboard", [
-        "Diagnóstico Nacional",
-        "Comparativos Internacionales",
-        "Tendencia Mensual",
-        "Emisiones de CO2"
-    ])
-
-# Navegación
+    st.markdown('<div class="sidebar-title">Menú de navegación</div>', unsafe_allow_html=True)
+    seccion = st.radio(
+        "",
+        list(menu_opciones.keys()),
+        format_func=lambda x: menu_opciones[x],
+        key="navegacion"
+    )
 
 # Navegación por sección
-if seccion == "Diagnóstico Nacional":
-    diagnostico_nacional.mostrar(pais, anio, df)
+if seccion == "Home":
+    home.mostrar()
+elif seccion == "Matriz Energética":
+    matriz_energetica.mostrar(df)
+elif seccion == "Consumo Energético":
+    consumo_energetico.mostrar(df)
+elif seccion == "Matriz Eléctrica":
+    matriz_electrica.mostrar(df)
 elif seccion == "Comparativos Internacionales":
-    comparativos_internacionales.mostrar(pais, anio, df)
-elif seccion == "Tendencia Mensual":
-    tendencia_mensual.mostrar(pais, anio)
+    comparativos_internacionales.mostrar(df)
 elif seccion == "Emisiones de CO2":
-    emisiones_co2.mostrar(anio)
+    emisiones_co2.mostrar(df)
+elif seccion == "Análisis de Relaciones y Desempeño":
+    relaciones_desempeno.mostrar(df)
+elif seccion == "Predicciones":
+    predicciones.mostrar()
+elif seccion == "Flujos Energéticos":
+    flujos_energeticos.mostrar()
