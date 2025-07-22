@@ -31,7 +31,7 @@ st.markdown("""
         padding-bottom: 10px;
     }
     .sidebar-radio label {
-        font-size: 18px;
+        font-size: 17px;
         padding: 8px 12px;
         border-radius: 6px;
         display: block;
