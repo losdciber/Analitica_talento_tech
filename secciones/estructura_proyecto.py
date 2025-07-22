@@ -1,17 +1,13 @@
 import streamlit as st
 
 def mostrar():
-    st.title("Estructura del Proyecto")
-    st.markdown("""
-    Esta sección presenta la estructura general del proyecto.
+    st.title("📁 Estructura del Proyecto")
 
-    **Carpetas principales:**
-    - `utils.py`: Funciones auxiliares para cargar datos u otras tareas comunes.
-    - `secciones/`: Módulos independientes para cada sección del dashboard.
-    - `data/`: Fuente de datos crudos o procesados.
-    - `app.py`: Punto de entrada del dashboard.
-    
-    **Estrategia modular:** cada sección se actualiza de forma independiente, facilitando mantenimiento, escalabilidad y lectura del código.
+    archivo_md = "estructura_proyecto.md"
 
-    **Optimización:** Adaptado para escritorio y dispositivos móviles para una visualización ágil.
-    """)
+    try:
+        with open(archivo_md, "r", encoding="utf-8") as file:
+            contenido = file.read()
+            st.markdown(contenido)
+    except FileNotFoundError:
+        st.error(f"❗ No se encontró el archivo `{archivo_md}`. Ejecuta primero `generar_mermaid.py` para generarlo.")

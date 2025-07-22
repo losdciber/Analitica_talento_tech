@@ -10,31 +10,30 @@ from secciones import (
     relaciones_desempeno,
     predicciones,
     flujos_energeticos,
-    estructura_proyecto  # NUEVA SECCIÓN
+    estructura_proyecto  # nueva sección
 )
 
-# Configurar la página
+# Configurar la página para pantalla amplia
 st.set_page_config(page_title="Dashboard Energético", layout="wide")
 
 # Cargar datos una sola vez
 df = cargar_datos()
 
-# Estilos CSS personalizados para el sidebar (modo claro) + responsividad
+# Estilos CSS personalizados responsivos
 st.markdown("""
     <style>
-    /* Sidebar personalizado */
+    /* Estilo sidebar */
     [data-testid="stSidebar"] {
         background-color: #f2f2f2;
-        padding: 1rem;
     }
     .sidebar-title {
-        font-size: 22px;
+        font-size: 24px;
         font-weight: bold;
         color: #000000;
         padding-bottom: 10px;
     }
     .sidebar-radio label {
-        font-size: 16px;
+        font-size: 17px;
         padding: 8px 12px;
         border-radius: 6px;
         display: block;
@@ -51,26 +50,21 @@ st.markdown("""
         color: #000000 !important;
     }
 
-    /* Ajustes para móvil */
-    @media only screen and (max-width: 768px) {
-        .sidebar-title {
-            font-size: 18px;
-        }
-        .sidebar-radio label {
-            font-size: 14px;
-            padding: 6px 10px;
-        }
+    /* Responsividad para Mermaid en móviles */
+    .mermaid svg {
+        width: 100% !important;
+        height: auto !important;
     }
 
-    /* Ajuste del ancho del contenedor principal para mejorar lectura */
-    .main .block-container {
-        padding-left: 1rem;
-        padding-right: 1rem;
+    @media only screen and (min-width: 768px) {
+        .mermaid svg {
+            width: 80% !important;
+        }
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar: navegación mejorada
+# Sidebar de navegación
 menu_opciones = {
     "Home": "Home",
     "Matriz Energética": "Matriz Energética",
@@ -81,7 +75,7 @@ menu_opciones = {
     "Análisis de Relaciones y Desempeño": "Análisis de Relaciones y Desempeño",
     "Predicciones": "Predicciones",
     "Flujos Energéticos": "Flujos Energéticos",
-    "Estructura del Proyecto": "Estructura del Proyecto"  # NUEVA OPCIÓN
+    "Estructura del Proyecto": "Estructura del Proyecto"  # agregado al menú
 }
 
 with st.sidebar:
@@ -93,7 +87,7 @@ with st.sidebar:
         key="navegacion"
     )
 
-# Navegación por sección
+# Enrutamiento por sección
 if seccion == "Home":
     home.mostrar()
 elif seccion == "Matriz Energética":
@@ -113,4 +107,4 @@ elif seccion == "Predicciones":
 elif seccion == "Flujos Energéticos":
     flujos_energeticos.mostrar()
 elif seccion == "Estructura del Proyecto":
-    estructura_proyecto.mostrar()
+    estructura_proyecto.mostrar()  # función que visualizará el diagrama
