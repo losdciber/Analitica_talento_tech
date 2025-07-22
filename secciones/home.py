@@ -35,7 +35,7 @@ def mostrar():
     # Encabezado principal
     col1, col2 = st.columns([5, 1])
     with col1:
-        st.markdown('<div class="centered-title">TRANSICIÓN ENERGÉTICA JUSTA</div>', unsafe_allow_html=True)
+        st.markdown('<div class="centered-title">TRANSICIÓN ENERGÉTICA</div>', unsafe_allow_html=True)
     with col2:
         st.image("imagenes/LogoBancolombia.png", width=120)
 
