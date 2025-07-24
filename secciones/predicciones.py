@@ -26,7 +26,7 @@ def mostrar(df=None):
     first_year = df['Year'].min()
     sectores = df['Sector'].unique()
 
-    # — Panel lateral: simple y claro —
+    # — Panel lateral —
     st.sidebar.header("🔧 Personaliza tu vista")
     sector = st.sidebar.selectbox("📍 Elige un sector", sectores)
 
@@ -35,12 +35,7 @@ def mostrar(df=None):
     mostrar_2030 = col1.button(" Ver hasta 2030")
     mostrar_2050 = col2.button(" Ver hasta 2050")
 
-    # Año de corte según el botón presionado
-    if mostrar_2050:
-        last_year = 2050
-    else:
-        last_year = 2030  # Por defecto o si se pulsa 2030
-
+    last_year = 2050 if mostrar_2050 else 2030
     anio_inicio = first_year
     anio_fin = last_year
     years_to_predict = np.arange(2023, last_year + 1)
@@ -85,7 +80,7 @@ def mostrar(df=None):
 
     df_real = df[(df['Sector'] == sector) & (df['Year'] >= anio_inicio) & (df['Year'] <= anio_fin)]
 
-    # Tabs con explicaciones
+    # Tabs
     tabs = st.tabs(["📊 Datos Reales", "📈 Predicciones"])
 
     with tabs[0]:
@@ -124,6 +119,9 @@ def mostrar(df=None):
             )
             st.plotly_chart(fig, use_container_width=True)
 
+            st.markdown("**Tipo de gráfico:** Línea con marcadores (ScatterPlot en Plotly)")
+            st.markdown("**Qué muestra:** Este gráfico compara las emisiones reales de CO₂ con las emisiones predichas por regresión lineal para el sector seleccionado entre los años elegidos.")
+
         if 'Prophet' in modelos:
             st.markdown("### 🔮 Predicción con Prophet")
             st.markdown("""
@@ -150,6 +148,9 @@ def mostrar(df=None):
                 height=400
             )
             st.plotly_chart(fig, use_container_width=True)
+
+            st.markdown("**Tipo de gráfico:** Línea con marcadores (ScatterPlot en Plotly)")
+            st.markdown("**Qué muestra:** Este gráfico compara las emisiones reales de CO₂ con las predicciones generadas por el modelo Prophet, mostrando cómo podrían evolucionar las emisiones en el futuro.")
 
     st.markdown("---")
     st.info("💡 Puedes cambiar de sector, método o año desde la barra lateral. ¡Explora diferentes futuros posibles!")
