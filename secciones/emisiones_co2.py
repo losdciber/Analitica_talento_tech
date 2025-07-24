@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 import pandas as pd
 import plotly.express as px
 from utils import ejecutar_consulta, mostrar_tarjeta_valor_maximo
@@ -25,7 +25,7 @@ def mostrar(df):
     total_emisiones = df_filtrado['Value'].sum()
     df_filtrado['Porcentaje'] = df_filtrado['Value'] / total_emisiones * 100
 
-    # 🏆 Tarjeta
+    # 🏆 Tarjeta de sector con mayor emisiones
     mostrar_tarjeta_valor_maximo(
         df_filtrado,
         campo_clave="Sector",
@@ -35,8 +35,8 @@ def mostrar(df):
         color="#1F4E79"
     )
 
-    # 📊 Tabla + Gráfico lado a lado alineados
-    st.markdown("### 📋 Emisiones de CO₂ por Sector - %Participación")
+    # 📋 Tabla + Gráfico de barras horizontales
+    st.markdown("### 📋 Emisiones de CO₂ por Sector - % Participación")
 
     col1, col2 = st.columns([1, 1.5])
 
@@ -70,17 +70,20 @@ def mostrar(df):
         )
         st.plotly_chart(fig, use_container_width=True)
 
-    # 📈 Gráfico de área apilada
-    st.markdown("### 📈 Evolución Histórica de Emisiones")
+        st.caption("📊 **Tipo de gráfico**: Barras horizontales apiladas. \n🔍 **Qué muestra**: Participación porcentual de las emisiones de CO₂ por sector en el año seleccionado.")
+
+    # 📈 Gráfico de área apilada histórica
+    st.markdown("### 📈 Evolución Histórica de Emisiones de CO₂ por Sector")
+
     df_group = df[df['Sector'].isin(sectores_sel)].groupby(['Year', 'Sector'])['Value'].sum().reset_index()
     fig2 = px.area(
         df_group,
         x='Year',
         y='Value',
         color='Sector',
-        #title='Evolución Histórica de Emisiones de CO₂ por Sector',
         labels={'Value': 'Emisiones de CO₂ (MtCO₂)'}
     )
     fig2.update_layout(legend_title_text='Sector', hovermode="x unified")
     st.plotly_chart(fig2, use_container_width=True)
 
+    st.caption("📈 **Tipo de gráfico**: Área apilada. \n🔍 **Qué muestra**: Evolución histórica del volumen total de emisiones de CO₂ por sector en Colombia.")
