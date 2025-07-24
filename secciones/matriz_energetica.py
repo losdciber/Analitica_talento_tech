@@ -105,7 +105,7 @@ def mostrar(df_global):
             title=f"Distribución Energética {anio}",
             hole=0.3,
             color="NOMBRE_ENERGETICO",
-            color_discrete_map=color_map
+            color_discrete_map=color_map,
             hover_data={"OFERTA_INTERNA_BRUTA_TJ": True}
 
         )
