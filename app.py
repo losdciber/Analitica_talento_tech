@@ -1,4 +1,3 @@
-
 #Importaciones
 
 #Se importa Streamlit, la biblioteca principal para crear la interfaz web.
@@ -151,4 +150,3 @@ elif seccion == "Flujos Energéticos":
     flujos_energeticos.mostrar()
 elif seccion == "Estructura del Proyecto":
     estructura_proyecto.mostrar()  # función que visualizará el diagrama
-
