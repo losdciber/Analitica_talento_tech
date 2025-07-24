@@ -5,3 +5,5 @@ prophet
 numpy
 scikit-learn
 pyngrok
+jupyter
+#python -m pip install --upgrade jupyter
