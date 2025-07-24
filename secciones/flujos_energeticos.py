@@ -71,7 +71,11 @@ def mostrar():
             use_container_width=True
         )
 
-        # 📋 Mostrar primero la tabla
+        st.markdown("""
+        **Tipo de gráfico:** Diagrama de Sankey  
+        **Qué muestra:** Este diagrama representa el flujo de energía **primaria** desde las fuentes originales (como petróleo, gas, carbón o renovables) hacia diferentes usos o sectores. Las **anchuras de las líneas** indican la magnitud del flujo energético en petajulios (PJ), facilitando la visualización de cómo se distribuye y transforma la energía en un país durante un año específico.
+        """)
+
         st.markdown("### 📋 Tabla de datos del flujo primario")
         st.dataframe(df_filtrado.rename(columns={
             "source": "Fuente",
@@ -79,7 +83,6 @@ def mostrar():
             "value": "Valor (PJ)"
         }))
 
-        # 🧠 Luego mostrar interpretación
         with st.expander("🧠 Interpretación del Flujo"):
             total = df_filtrado['value'].sum()
             top_flujos = df_filtrado.sort_values('value', ascending=False).head(3)
@@ -90,7 +93,6 @@ def mostrar():
             """)
             for _, row in top_flujos.iterrows():
                 st.markdown(f"  • **{row['source']} → {row['target']}**: {row['value']:,.2f} PJ")
-
 
     # TAB 2: FLUJO SECUNDARIO
     with tab2:
@@ -113,7 +115,11 @@ def mostrar():
             use_container_width=True
         )
 
-        # 📋 Mostrar la tabla primero
+        st.markdown("""
+        **Tipo de gráfico:** Diagrama de Sankey  
+        **Qué muestra:** Este gráfico muestra el flujo de energía **secundaria**, es decir, cómo la energía ya transformada (por ejemplo, electricidad o combustibles refinados) se distribuye entre distintos sectores como transporte, industria o residencial. Las líneas conectan los orígenes con los destinos y su grosor representa el volumen energético en petajulios (PJ).
+        """)
+
         st.markdown("### 📋 Tabla de datos del flujo secundario")
         st.dataframe(df_filtrado.rename(columns={
             "source": "Fuente",
@@ -121,7 +127,6 @@ def mostrar():
             "value": "Valor (PJ)"
         }))
 
-        # 🧠 Interpretación colapsable debajo
         with st.expander("🧠 Interpretación del Flujo"):
             total = df_filtrado['value'].sum()
             top_flujos = df_filtrado.sort_values('value', ascending=False).head(3)
