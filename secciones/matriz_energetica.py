@@ -114,7 +114,7 @@ def mostrar(df_global):
 
 
         # 🔽 Descripción textual
-    st.markdown("""
+        st.markdown("""
     **Tipo de gráfico:** Gráfico de pastel (donut)  
     **Descripción:** Este gráfico muestra la participación porcentual de cada fuente energética en la matriz de Colombia para el año seleccionado.  
     Permite comparar visualmente la proporción de energía aportada por cada fuente (como petróleo, gas, hidroenergía, etc.) en un año específico.
@@ -153,7 +153,7 @@ def mostrar(df_global):
         st.plotly_chart(fig_bar, use_container_width=True)
 
 # 🔽 Descripción textual
-    st.markdown("""
+        st.markdown("""
     **Tipo de gráfico:** Gráfico de barras apiladas  
     **Descripción:** Este gráfico muestra la evolución histórica de la participación porcentual de cada fuente energética en Colombia.  
     Permite observar cómo ha cambiado la matriz energética del país a lo largo de los años, identificando tendencias, reemplazos o permanencia de fuentes.
