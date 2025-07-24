@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 import plotly.express as px
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -73,6 +73,11 @@ def mostrar(df):
             plt.xticks(rotation=90, ha='right')
             plt.tight_layout()
             st.pyplot(fig)
+
+            st.markdown("""
+**Tipo de gráfico:** Gráfico de barras apiladas (stacked bar chart)  
+**Qué muestra:** Participación porcentual de energías renovables y no renovables en cada país para el año seleccionado.
+""")
         else:
             st.warning(f"No hay datos para el año {anio}.")
 
@@ -109,7 +114,8 @@ def mostrar(df):
         with col4:
             if st.button("🏆 Países representativos"):
                 representativos = [
-                    "Colombia","United States", "People's Republica of China", "India", "Germany", "France", "Brazil", "Japan", "United Kingdom", "Russia", "Canada, Spain, Korea"
+                    "Colombia", "United States", "People's Republica of China", "India", "Germany", "France",
+                    "Brazil", "Japan", "United Kingdom", "Russia", "Canada", "Spain", "Korea"
                 ]
                 st.session_state.paises_seleccionados_multi = [p for p in paises_disponibles if p in representativos][:12]
 
@@ -162,5 +168,7 @@ def mostrar(df):
 
         st.plotly_chart(fig_multi, use_container_width=True)
 
-
-
+        st.markdown("""
+**Tipo de gráfico:** Gráfico de barras apiladas por país y año (facetas)  
+**Qué muestra:** Evolución anual del porcentaje de participación de fuentes renovables y no renovables en la generación eléctrica para múltiples países seleccionados.
+""")
