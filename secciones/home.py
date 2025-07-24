@@ -43,36 +43,34 @@ def mostrar():
     with st.expander("📖 INTRODUCCIÓN"):
         st.markdown('<div class="intro-text">', unsafe_allow_html=True)
         st.markdown("""
-        Desde la adopción del Acuerdo de París en 2015, la transición energética se ha consolidado como un eje central de los esfuerzos globales para enfrentar la crisis climática. En dicho acuerdo, 196 países, entre ellos Colombia, se comprometieron a evitar que el aumento de la temperatura global supere los 2 °C respecto a los niveles preindustriales, procurando limitarlo a 1,5 °C. Como resultado, más de 100 naciones, responsables de cerca de dos tercios de las emisiones globales y del PIB mundial, han fijado metas de carbono neutralidad para el año 2050 o poco después.
+        Desde la firma del Acuerdo de París en 2015, la transición energética se ha convertido en un pilar fundamental de los esfuerzos globales para hacer frente a la crisis climática. En este acuerdo, 196 países —incluida Colombia— se comprometieron a evitar que el aumento de la temperatura global supere los 2 °C respecto a los niveles preindustriales, con el objetivo de limitarlo a 1,5 °C. Como consecuencia, más de 100 naciones, responsables de aproximadamente dos tercios de las emisiones globales y del PIB mundial, han establecido metas para alcanzar la carbono neutralidad hacia 2050 o en fechas cercanas.
 
-        Colombia no ha sido ajena a este compromiso. Con un enfoque alineado a las metas climáticas internacionales, el país ha trazado una hoja de ruta para transformar su matriz energética mediante políticas públicas como el Plan Energético Nacional, la Estrategia 2050 y la Misión de Transformación Energética.
-        """, unsafe_allow_html=True)
+        Colombia, en consonancia con estos compromisos internacionales, ha definido una hoja de ruta para transformar su matriz energética. Este proceso se sustenta en políticas públicas clave como el Plan Energético Nacional, la Estrategia 2050 y la Misión de Transformación Energética.""", unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
     # Problemática
     with st.expander("📌 1. DESCRIPCIÓN DE LA PROBLEMÁTICA"):
         st.markdown('<div class="intro-text">', unsafe_allow_html=True)
         st.markdown("""
-        Colombia atraviesa una etapa crucial en su transición energética. El país ha comenzado a apostar por un mayor uso de energías limpias como la solar, eólica, hidroeléctrica, biomasa y, más recientemente, el hidrógeno verde.
+        Colombia se encuentra en una etapa decisiva de su transición energética, impulsando cada vez más el uso de fuentes limpias como la solar, eólica, hidroeléctrica, biomasa y, más recientemente, el hidrógeno verde.
 
-        Un diagnóstico inicial evidenció una alta concentración en fuentes hidroeléctricas: al cierre de 2018, el 68,3 % de la capacidad instalada provenía del agua, seguida por un 30,7 % de térmicas, y una participación marginal de apenas 0,8 % de solar y eólica, y 0,2 % de bagazo.
+        Un diagnóstico inicial reveló una marcada dependencia de la energía hidroeléctrica: al cierre de 2018, el 68,3 % de la capacidad instalada provenía de esta fuente, seguida por un 30,7 % de generación térmica. En contraste, las fuentes solar y eólica apenas representaban el 0,8 %, mientras que el bagazo contribuía con solo el 0,2 %.
 
-        Aunque ha habido avances, la incorporación de energías renovables no convencionales sigue siendo limitada. Además, la transición debe ser justa, lo que implica beneficios para todos los sectores sociales, especialmente comunidades vulnerables.
+        Si bien se han registrado avances, la participación de energías renovables no convencionales continúa siendo limitada. En este contexto, es fundamental que la transición energética sea justa, garantizando beneficios para todos los sectores de la sociedad, en especial para las comunidades más vulnerables.
 
-        También es clave contar con información clara, accesible y actualizada que oriente estas decisiones. Comprender la evolución del sistema energético —diferenciando entre fuentes renovables y no renovables— permite identificar barreras, logros y oportunidades.
-        """, unsafe_allow_html=True)
+        Asimismo, resulta clave contar con información clara, accesible y actualizada que oriente la toma de decisiones. Comprender la evolución del sistema energético —diferenciando entre fuentes renovables y no renovables— permite identificar obstáculos, logros alcanzados y oportunidades de mejora. """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
     # Objetivos
     with st.expander("🎯 2. OBJETIVO PRINCIPAL Y ESPECÍFICOS"):
         st.markdown('<div class="intro-text">', unsafe_allow_html=True)
         st.markdown("""
-        Documentar y analizar el avance de Colombia en su transición energética hacia fuentes renovables (solar, eólica, hidroeléctrica, biomasa e hidrógeno verde), en línea con sus compromisos nacionales e internacionales de reducción de emisiones.
-
+        Objetivo General
+        Documentar y analizar el progreso de Colombia en su transición energética hacia fuentes renovables —como la solar, eólica, hidroeléctrica, biomasa e hidrógeno verde— en concordancia con los compromisos nacionales e internacionales de mitigación del cambio climático y reducción de emisiones de gases de efecto invernadero.
         <ul>
-            <li>Medir cuantitativamente la evolución del aporte de cada fuente renovable en la matriz energética nacional (2000–2025).</li>
-            <li>Comparar el desempeño energético de Colombia con países latinoamericanos y globales.</li>
-            <li>Proponer recomendaciones estratégicas para acelerar la transición energética justa.</li>
+            <li>Cuantificar la evolución del aporte de cada fuente renovable en la matriz energética nacional durante el período 2000–2025, identificando tendencias, brechas y puntos críticos en su desarrollo..</li>
+            <li>Comparar el desempeño energético de Colombia con otros países de América Latina y referentes globales, evaluando su posición relativa en términos de diversificación, sostenibilidad y penetración de energías limpias.</li>
+            <li>Formular recomendaciones estratégicas orientadas a acelerar una transición energética justa, inclusiva y sostenible, con énfasis en el cierre de brechas sociales, territoriales y tecnológicas.</li>
         </ul>
         """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
@@ -83,24 +81,26 @@ def mostrar():
         st.markdown("""
         <strong>Resumen de hallazgos:</strong>
         <ul>
-            <li>Colombia ha logrado avances significativos en generación renovable, especialmente hidroeléctrica, pero su dependencia de una sola fuente limita la resiliencia del sistema.</li>
-            <li>La electrificación de sectores clave como el transporte y la industria sigue siendo insuficiente.</li>
-            <li>Existen brechas regionales, tecnológicas y sociales que afectan la equidad en la transición energética.</li>
-            <li>El marco institucional y financiero está en desarrollo, pero requiere consolidación y mayor coherencia intersectorial.</li>
+            <li>Colombia ha registrado avances importantes en la generación de energía renovable, especialmente en el aprovechamiento de fuentes hidroeléctricas. Sin embargo, la alta dependencia de esta única fuente limita la resiliencia y flexibilidad del sistema energético nacional.</li>
+            <li>La electrificación de sectores estratégicos como el transporte y la industria aún es insuficiente, lo que ralentiza la descarbonización integral del país.</li>
+            <li>Persisten brechas regionales, tecnológicas y sociales que dificultan una transición energética equitativa y sostenible.</li>
+            <li>Aunque el marco institucional y financiero ha mostrado avances, aún requiere fortalecimiento y mayor articulación intersectorial para lograr una implementación efectiva y coherente.</li>
+            
         </ul>
 
         <strong>Respuestas frente a la problemática:</strong>
         <ul>
-            <li>Comprender mejor cómo evoluciona la generación y el consumo de energía.</li>
-            <li>Tomar decisiones estratégicas basadas en datos.</li>
-            <li>Articular políticas públicas, inversión privada y participación ciudadana.</li>
+            <li>Profundizar en el análisis de la evolución de la generación y el consumo energético, diferenciando fuentes y sectores.</li>
+            <li>Promover la toma de decisiones estratégicas basadas en datos confiables, actualizados y accesibles.</li>
+            <li>Fomentar la articulación efectiva entre políticas públicas, inversión privada y participación ciudadana para acelerar la transformación del sistema energético.</li>
+            
         </ul>
 
         <strong>Implicaciones:</strong>
         <ul>
-            <li>Colombia podría no cumplir con sus compromisos climáticos.</li>
-            <li>Persistiría la vulnerabilidad energética y brechas sociales.</li>
-            <li>Se desaprovecharía su liderazgo en América Latina.</li>
+            <li>Existe el riesgo de que Colombia no logre cumplir sus compromisos climáticos a nivel nacional e internacional.</li>
+            <li>Se mantendrían condiciones de vulnerabilidad energética y desigualdad social en distintas regiones del país.</li>
+            <li>El país podría perder su oportunidad de consolidarse como líder regional en la transición energética en América Latina.</li>
         </ul>
         """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
@@ -111,35 +111,37 @@ def mostrar():
         st.markdown("""
         <strong>Acciones sugeridas:</strong>
         <ul>
-            <li>Acelerar proyectos solares y eólicos, especialmente en La Guajira.</li>
-            <li>Impulsar movilidad eléctrica y eficiencia energética.</li>
-            <li>Optimizar gestión hídrica y desarrollar infraestructura de almacenamiento.</li>
-            <li>Diseñar políticas para eliminar progresivamente el carbón.</li>
-            <li>Fortalecer los NDC y captar financiamiento climático internacional.</li>
+            <li>Acelerar la implementación de proyectos solares y eólicos, con especial énfasis en regiones estratégicas como La Guajira.</li>
+            <li>Fomentar la movilidad eléctrica y promover medidas de eficiencia energética en todos los sectores productivos.</li>
+            <li>Optimizar la gestión del recurso hídrico e impulsar el desarrollo de infraestructura de almacenamiento energético.</li>
+            <li>Diseñar e implementar políticas para la eliminación progresiva del uso de carbón como fuente energética.</li>
+            <li>Fortalecer las Contribuciones Determinadas a Nivel Nacional (NDC) y activar mecanismos para captar financiamiento climático internacional.</li>
         </ul>
 
         <strong>Siguientes pasos:</strong>
         <ul>
-            <li>Actualizar datos hasta 2025.</li>
-            <li>Profundizar análisis por sectores.</li>
-            <li>Consolidar alianzas público-privadas.</li>
-            <li>Implementar campañas de educación y cultura energética.</li>
+            <li>Actualizar y ampliar los datos de generación y consumo energético hasta el año 2025.</li>
+            <li>Profundizar el análisis sectorial, diferenciando dinámicas y desafíos por industria, región y tipo de usuario.</li>
+            <li>Consolidar alianzas público-privadas que faciliten inversión, innovación y transferencia tecnológica.</li>
+            <li>Diseñar campañas de educación y cultura energética, orientadas a la ciudadanía y a tomadores de decisiones.
+
+</li>
         </ul>
 
         <strong>Ideas para futuros análisis:</strong>
         <ul>
-            <li>Modelos predictivos con IA.</li>
-            <li>Comparativos internacionales con enfoque cualitativo.</li>
-            <li>Evaluar impactos sociales y territoriales.</li>
-            <li>Análisis de ciclo de vida completo de energías renovables.</li>
+            <li>Desarrollo de modelos predictivos mediante inteligencia artificial para proyectar escenarios de transición.</li>
+            <li>Realización de análisis comparativos internacionales con enfoque cualitativo y contextual.</li>
+            <li>Evaluación de los impactos sociales y territoriales de la transición energética.</li>
+            <li>Estudio del ciclo de vida completo de las tecnologías de energía renovable.</li>
         </ul>
 
         <strong>Implicaciones:</strong>
         <ul>
-            <li>Mayor vulnerabilidad energética por falta de diversificación.</li>
-            <li>Compromiso de metas al 2030 si no se acelera la acción.</li>
-            <li>Limitaciones para integrar renovables sin infraestructura adecuada.</li>
-            <li>Riesgo de diluir esfuerzos sin monitoreo constante.</li>
+            <li>Aumento de la vulnerabilidad energética debido a la falta de diversificación en la matriz.</li>
+            <li>Riesgo de incumplimiento de las metas climáticas para 2030 si no se acelera el ritmo de implementación.</li>
+            <li>Limitaciones técnicas y operativas para integrar energías renovables sin infraestructura adecuada.</li>
+            <li>Pérdida de efectividad en las políticas si no se establece un sistema de monitoreo y evaluación continuo.</li>
         </ul>
         """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
