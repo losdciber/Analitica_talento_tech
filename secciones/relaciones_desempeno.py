@@ -1,5 +1,4 @@
-import streamlit as st
-
+import streamlit as st 
 import pandas as pd
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
@@ -10,7 +9,7 @@ from sklearn.metrics import confusion_matrix
 from utils import obtener_emisiones_co2, obtener_datos_corr_emisiones_y_generacion
 
 def mostrar(anio=2022):
-    st.header("Relación entre desempeño y emisiones de CO₂")
+    st.header("📊 Relación entre desempeño y emisiones de CO₂")
 
     # --- SIDEBAR ---
     st.sidebar.title("Matrices disponibles")
@@ -18,7 +17,7 @@ def mostrar(anio=2022):
     mostrar_matriz_correlacion = st.sidebar.checkbox("Matriz de correlación")
 
     # --- SLIDERS DE CLASIFICACIÓN ---
-    st.subheader("Ajuste de niveles de clasificación")
+    st.subheader("🎛️ Ajuste de niveles de clasificación")
     bajo_max = st.slider("Límite para 'Bajo'", 0.0, 20.0, 7.0)
     medio_max = st.slider("Límite para 'Medio'", bajo_max + 0.1, 30.0, 20.0)
     st.markdown("- 'Bajo' ≤ {:.1f}".format(bajo_max))
@@ -52,7 +51,7 @@ def mostrar(anio=2022):
     cm = confusion_matrix(y_test, y_pred)
 
     # --- CLASIFICACIÓN MANUAL ---
-    st.subheader("Clasificador en tiempo real")
+    st.subheader("🤖 Clasificador en tiempo real")
     valor_manual = st.number_input("Ingrese un valor de emisión (Mt de CO₂):", 0.0, 40.0, 10.0)
     pred_clase = modelo.predict([[valor_manual]])[0]
     clase_nombre = list(etiquetas.keys())[list(etiquetas.values()).index(pred_clase)]
@@ -60,7 +59,8 @@ def mostrar(anio=2022):
 
     # --- MATRIZ DE CONFUSIÓN INTERACTIVA ---
     if mostrar_matriz_confusion:
-        st.subheader("Matriz de confusión")
+        st.subheader("📉 Matriz de confusión")
+
         st.markdown("""
         Esta matriz compara las predicciones del modelo con los valores reales.  
         - La diagonal muestra los aciertos.  
@@ -72,11 +72,15 @@ def mostrar(anio=2022):
         fig = ff.create_annotated_heatmap(z, x=labels, y=labels, colorscale='Blues')
         fig.update_layout(height=350, width=350, margin=dict(t=40, l=40, b=40))
         st.plotly_chart(fig, use_container_width=False)
-        st.write("Precisión del modelo: {:.2f}%".format(modelo.score(X_test, y_test) * 100))
+
+        st.caption("🧮 **Tipo de gráfico**: Heatmap (matriz de calor) \n🔍 **Qué muestra**: Muestra el rendimiento del modelo clasificando emisiones en categorías 'Bajo', 'Medio' y 'Alto'. Aciertos en la diagonal.")
+
+        st.write("🎯 Precisión del modelo: {:.2f}%".format(modelo.score(X_test, y_test) * 100))
 
     # --- MATRIZ DE CORRELACIÓN INTERACTIVA CON ANÁLISIS ---
     if mostrar_matriz_correlacion:
-        st.subheader("Matriz de correlación")
+        st.subheader("🔗 Matriz de correlación")
+
         st.markdown("""
         Esta matriz muestra cómo se relacionan entre sí las siguientes variables:
         - *EmisionesFosiles*: emisiones por combustibles fósiles.
@@ -103,6 +107,8 @@ def mostrar(anio=2022):
             fig.update_layout(height=400, width=400, margin=dict(t=40, l=40, b=40))
             st.plotly_chart(fig, use_container_width=False)
 
+            st.caption("🧩 **Tipo de gráfico**: Heatmap (matriz de calor) \n🔍 **Qué muestra**: Muestra el grado de correlación entre emisiones y generación por tipo de fuente. Valores cercanos a 1 o -1 indican relaciones fuertes.")
+
             st.markdown("""
             *Leyenda de variables:*
 
@@ -114,13 +120,12 @@ def mostrar(anio=2022):
             """)
 
             # Análisis automático
-            st.subheader("Análisis automático de relaciones")
+            st.subheader("📌 Análisis automático de relaciones")
 
             for i in matriz_corr.columns:
                 for j in matriz_corr.columns:
                     if i != j:
                         corr = matriz_corr.loc[i, j]
-                        interpretacion = ""
                         if abs(corr) >= 0.8:
                             intensidad = "muy fuerte"
                         elif abs(corr) >= 0.5:
@@ -133,4 +138,4 @@ def mostrar(anio=2022):
                         tipo = "positiva (directamente proporcional)" if corr > 0 else "negativa (inversamente proporcional)" if corr < 0 else "sin relación"
                         st.markdown(f"- *{i} vs {j}*: correlación de {corr:.2f} → relación {intensidad} y {tipo}.")
         else:
-            st.warning("No hay datos suficientes para calcular la matriz.")
+            st.warning("⚠️ No hay datos suficientes para calcular la matriz.")
