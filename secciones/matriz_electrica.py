@@ -58,6 +58,7 @@ def mostrar(df_global):
             legend_title="Tipo de Energía"
         )
         st.plotly_chart(fig_comp, use_container_width=True)
+        st.caption("🧁 Este gráfico de torta muestra la proporción total de energía renovable y no renovable en la matriz eléctrica seleccionada.")
 
     # 📈 TAB 2: Tendencias
     with tab2:
@@ -93,6 +94,7 @@ def mostrar(df_global):
             height=450
         )
         st.plotly_chart(fig_line, use_container_width=True)
+        st.caption("📈 Este gráfico de líneas muestra la evolución mensual de la generación de electricidad según el tipo de fuente energética.")
 
     # 📉 TAB 3: Porcentaje anual
     with tab3:
@@ -112,6 +114,7 @@ def mostrar(df_global):
         )
         fig_porc.update_layout(yaxis_range=[0, 100], xaxis_title="Año", yaxis_title="Porcentaje (%)", legend_title="Tipo de Energía")
         st.plotly_chart(fig_porc, use_container_width=True)
+        st.caption("📊 Este gráfico de barras apiladas muestra la participación porcentual anual de fuentes renovables y no renovables en la generación total.")
 
     # 📊 TAB 4: Comparativo Renovables vs No Renovables
     with tab4:
@@ -175,3 +178,4 @@ def mostrar(df_global):
 
         plt.suptitle(f"{pais if pais != 'Todos' else 'Global'}", fontsize=14)
         st.pyplot(fig)
+        st.caption("📊 Estos gráficos de barras apiladas muestran el desglose anual por fuente de generación de electricidad renovable y no renovable.")
