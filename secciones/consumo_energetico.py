@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 import pandas as pd
 import plotly.express as px
 from utils import ejecutar_consulta
@@ -84,6 +84,11 @@ def mostrar(df_global):
                 )
                 fig_pie.update_traces(textposition='inside', textinfo='percent+label')
                 st.plotly_chart(fig_pie, use_container_width=True)
+                st.markdown("""
+                **🧩 Tipo de gráfico:** Gráfico de torta (donut)  
+                **📌 Qué muestra:** Distribución porcentual del consumo energético por fuente para el año seleccionado.  
+                Permite identificar qué fuentes dominan el consumo energético en ese periodo.
+                """)
 
             with col2:
                 st.markdown("#### 📊 Barras Apiladas 100%")
@@ -103,6 +108,11 @@ def mostrar(df_global):
                 )
                 fig_bar.update_layout(barmode="stack", yaxis=dict(range=[0, 100]))
                 st.plotly_chart(fig_bar, use_container_width=True)
+                st.markdown("""
+                **📊 Tipo de gráfico:** Barras apiladas 100%  
+                **📌 Qué muestra:** Participación porcentual de cada fuente energética a lo largo de los años.  
+                Ideal para analizar transiciones energéticas dentro del sector.
+                """)
 
             # Área apilada histórica
             st.markdown("#### 📈 Evolución Histórica Absoluta")
@@ -120,8 +130,8 @@ def mostrar(df_global):
             )
             fig_area.update_layout(legend_title_text="Fuente", hovermode="x unified")
             st.plotly_chart(fig_area, use_container_width=True)
-
-
-
-
-
+            st.markdown("""
+            **📈 Tipo de gráfico:** Área apilada  
+            **📌 Qué muestra:** Evolución absoluta del consumo energético (en TJ) por fuente en el tiempo.  
+            Permite ver tanto el crecimiento total como el aporte individual de cada fuente.
+            """)
