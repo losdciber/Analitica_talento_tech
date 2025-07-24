@@ -106,7 +106,6 @@ def mostrar(df_global):
             hole=0.3,
             color="NOMBRE_ENERGETICO",
             color_discrete_map=color_map,
-            hover_data={"OFERTA_INTERNA_BRUTA_TJ": True}
 
         )
         fig_pie.update_traces(textposition='inside', textinfo='percent+label')
