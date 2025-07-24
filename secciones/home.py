@@ -125,7 +125,7 @@ def mostrar():
             <li>Consolidar alianzas público-privadas que faciliten inversión, innovación y transferencia tecnológica.</li>
             <li>Diseñar campañas de educación y cultura energética, orientadas a la ciudadanía y a tomadores de decisiones.
 
-</li>
+        </li>
         </ul>
 
         <strong>Ideas para futuros análisis:</strong>
