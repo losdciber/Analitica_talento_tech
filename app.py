@@ -1,3 +1,11 @@
+
+#Importaciones
+
+#Se importa Streamlit, la biblioteca principal para crear la interfaz web.
+#Se importa cargar_datos desde el módulo utils.py para cargar los datos.
+#Se importa cada módulo desde secciones/, cada uno contiene una función mostrar() que representa una vista o sección del dashboard.
+
+
 import streamlit as st 
 from utils import cargar_datos
 from secciones import (
@@ -13,13 +21,34 @@ from secciones import (
     estructura_proyecto  # nueva sección
 )
 
+
+
 # Configurar la página para pantalla amplia
+
+#Establece el título del navegador como "Dashboard Energético".
+#La opción layout="wide" hace que la app utilice el ancho completo de la pantalla, ideal para dashboards.
+
 st.set_page_config(page_title="Dashboard Energético", layout="wide")
 
-# Cargar datos una sola vez
+# Cargar datos
+
+#Carga los datos una sola vez al inicio para ser usados en varias secciones.
+#Esto optimiza el rendimiento, evitando recargas innecesarias.
+
 df = cargar_datos()
 
 # Estilos CSS personalizados responsivos
+
+#Este bloque:
+
+#Personaliza el sidebar:
+
+#Cambia colores, tamaño de fuente, efecto hover, y estilos activos.
+
+#Mejora visualización de gráficas Mermaid (diagrama de flujo, arquitectura, etc.), especialmente en dispositivos móviles.
+
+#Buen toque para hacer más profesional y responsivo el dashboard.
+
 st.markdown("""
     <style>
     /* Estilo sidebar */
@@ -64,7 +93,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar de navegación
+# Menú lateral de navegación (Sidebar)
+
+#Define las opciones del menú como claves de un diccionario.
+
+#Usa st.radio para que el usuario elija una sección del dashboard.
+
+#La clave seleccionada se guarda en seccion.
+
 menu_opciones = {
     "Home": "Home",
     "Matriz Energética": "Matriz Energética",
@@ -88,6 +124,13 @@ with st.sidebar:
     )
 
 # Enrutamiento por sección
+
+#Según la selección del menú, se llama la función mostrar() de cada módulo.
+
+#Las secciones que necesitan datos (df) los reciben como parámetro.
+
+#Otras secciones (como home, predicciones, estructura_proyecto, etc.) no necesitan el df.
+
 if seccion == "Home":
     home.mostrar()
 elif seccion == "Matriz Energética":
@@ -108,3 +151,4 @@ elif seccion == "Flujos Energéticos":
     flujos_energeticos.mostrar()
 elif seccion == "Estructura del Proyecto":
     estructura_proyecto.mostrar()  # función que visualizará el diagrama
+
